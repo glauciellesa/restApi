@@ -1,0 +1,109 @@
+{
+  "dishes": [
+    {
+      "id": "1",
+      "name": "Spaghetti Carbonara",
+      "timeToPrepare": "30 minutes",
+      "ingredients": [
+        "400g spaghetti",
+        "150g pancetta or guanciale, diced",
+        "3 large eggs",
+        "1 cup grated Pecorino Romano cheese",
+        "Black pepper, freshly ground",
+        "Salt to taste"
+      ],
+      "steps": [
+        "Bring a large pot of salted water to a boil and cook the spaghetti until al dente. Drain the pasta, reserving some pasta water.",
+        "In a skillet, cook the pancetta or guanciale until crispy. Remove from heat and set aside.",
+        "In a bowl, whisk together the eggs, grated Pecorino Romano cheese, and a generous amount of freshly ground black pepper.",
+        "Add the cooked pancetta/guanciale to the egg mixture and stir.",
+        "Toss the cooked spaghetti in the egg mixture until well coated. If needed, add a bit of reserved pasta water to create a creamy sauce.",
+        "Serve immediately with extra Pecorino Romano and black pepper on top."
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Chicken Stir-Fry",
+      "timeToPrepare": "25 minutes",
+      "ingredients": [
+        "500g boneless, skinless chicken breasts, thinly sliced",
+        "2 cups mixed vegetables (bell peppers, broccoli, carrots, snow peas, etc.), sliced",
+        "3 tablespoons soy sauce",
+        "2 tablespoons oyster sauce",
+        "1 tablespoon cornstarch",
+        "2 tablespoons vegetable oil",
+        "3 cloves garlic, minced",
+        "1-inch piece of ginger, grated",
+        "Salt and pepper to taste"
+      ],
+      "steps": [
+        "In a small bowl, mix soy sauce, oyster sauce, and cornstarch to create the sauce. Set aside.",
+        "Heat vegetable oil in a large skillet or wok over high heat.",
+        "Add minced garlic and grated ginger, sauté for a minute until fragrant.",
+        "Add sliced chicken to the skillet and cook until it's no longer pink.",
+        "Add the mixed vegetables and stir-fry for a few minutes until they are tender-crisp.",
+        "Pour the sauce over the chicken and vegetables, and toss everything together until well coated and heated through.",
+        "Season with salt and pepper to taste.",
+        "Serve the chicken stir-fry over steamed rice."
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Caprese Salad",
+      "timeToPrepare": "10 minutes",
+      "ingredients": [
+        "3 ripe tomatoes, sliced",
+        "200g fresh mozzarella cheese, sliced",
+        "Fresh basil leaves",
+        "Extra-virgin olive oil",
+        "Balsamic glaze (optional)",
+        "Salt and pepper to taste"
+      ],
+      "steps": [
+        "Arrange the tomato slices and mozzarella slices on a serving platter, alternating them.",
+        "Tuck fresh basil leaves between the tomato and mozzarella slices.",
+        "Drizzle extra-virgin olive oil over the salad.",
+        "Optionally, add a few swirls of balsamic glaze for extra flavor.",
+        "Sprinkle with salt and freshly ground black pepper to taste.",
+        "Serve immediately as a refreshing appetizer or side dish."
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Vegetable Biryani",
+      "timeToPrepare": "50 minutes",
+      "ingredients": [
+        "1.5 cups basmati rice",
+        "2 cups mixed vegetables (carrots, potatoes, peas, beans, etc.), diced",
+        "1 large onion, thinly sliced",
+        "1/2 cup plain yogurt",
+        "1/4 cup milk",
+        "2 tablespoons ghee or vegetable oil",
+        "1 cinnamon stick",
+        "4-5 cloves",
+        "4-5 green cardamom pods",
+        "1 bay leaf",
+        "1 teaspoon cumin seeds",
+        "1 teaspoon ginger-garlic paste",
+        "1 teaspoon biryani masala (or garam masala)",
+        "1/2 teaspoon turmeric powder",
+        "1/2 teaspoon red chili powder",
+        "Saffron strands soaked in milk (for garnish, optional)",
+        "Fresh coriander leaves and fried onions for garnish (optional)",
+        "Salt to taste"
+      ],
+      "steps": [
+        "Wash the basmati rice until the water runs clear. Soak the rice in water for 30 minutes, then drain.",
+        "Heat ghee or vegetable oil in a large pot over medium heat. Add the whole spices (cinnamon stick, cloves, cardamom pods, bay leaf, cumin seeds) and sauté until fragrant.",
+        "Add the sliced onions and cook until they turn golden brown.",
+        "Stir in the ginger-garlic paste and sauté for another minute.",
+        "Add the diced vegetables, biryani masala, turmeric powder, and red chili powder. Cook for a few minutes until the vegetables start to soften.",
+        "In a separate bowl, mix the plain yogurt and milk. Add this mixture to the pot and season with salt.",
+        "Layer the soaked and drained basmati rice over the vegetable mixture in the pot.",
+        "Sprinkle saffron-soaked milk over the rice for a lovely aroma and color (optional).",
+        "Cover the pot with a tight-fitting lid and cook on low heat for about 20-25 minutes or until the rice is fully cooked and fluffy.",
+        "Garnish with fresh coriander leaves and fried onions (optional) before serving."
+      ]
+    }
+  ]
+}
