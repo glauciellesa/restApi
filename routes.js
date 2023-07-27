@@ -1,5 +1,4 @@
 import express from "express";
-import masterKey from "./config.js";
 import { getAllDishes, getDish } from "./services.js";
 
 const router = express.Router();
@@ -12,8 +11,7 @@ router.get("/", (req, res) => {
 
 router.get("/:dishName", function (req, res) {
   const dishName = req.params.dishName.toLowerCase();
-  console.log(req.query);
-  /* { id: 'spaghetti&appid=fdggavcyyatexcda' } */
+  console.log("quer", req.query);
   const dish = getDish(dishName);
   res.json(dish);
 });

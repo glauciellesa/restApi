@@ -1,6 +1,5 @@
 import "dotenv/config";
 
-const masterKey = process.env.NODE_ENV;
+const masterKey = process.env.APP_KEY;
 
-console.log("proce", process.env.NODE_ENV);
 export default masterKey;
