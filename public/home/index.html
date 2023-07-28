@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Dish</title>
+  </head>
+
+  <body style="box-sizing: border-box; padding: 0; margin: 0">
+    <h1 style="padding: 0.5rem">My dishes</h1>
+    <div
+      class="createNewDish"
+      style="background-color: rgb(103, 102, 102); color: white; padding: 2rem"
+    >
+      <h3>Add new dish</h3>
+      <form>
+        <label for="dishName">Dish Name:</label>
+        <input type="text" name="dishName" required />
+        <label for="timePrepare">Time to prepare</label>
+        <input
+          type="text"
+          name="timePrepare"
+          required
+          placeholder="x minutes"
+        />
+        <label for="steps">Steps to prepare</label>
+        <input type="text" name="steps" required placeholder="x minutes" />
+        <input id="submit" type="submit" value="Submit" />
+      </form>
+    </div>
+    <section
+      class="myDishes"
+      style="padding: 2rem; background-color: rgb(187, 187, 187)"
+    >
+      <h3>My favorite dishes</h3>
+      <ul id="listDishes" class="listDishes"></ul>
+    </section>
+    <section
+      class="removeDishes"
+      style="padding: 2rem; background-color: rgb(103, 102, 102); color: white"
+    >
+      <h3>Remove dishe from your favorites</h3>
+
+      <input
+        id="dish"
+        type="text"
+        placeholder="Dish name"
+        style="padding: 0.5rem"
+      />
+      <button
+        id="btnRemoveDish"
+        type="submit"
+        style="
+          padding: 0.5rem;
+          background-color: rgb(73, 73, 73);
+          color: aliceblue;
+        "
+      >
+        Remove
+      </button>
+    </section>
+    <script>
+      document.getElementById("submit").addEventListener("click", (e) => {
+        e.preventDefault();
+        const dishName = document.getElementsByName("dishName")[0].value;
+        const timePrepare = document.getElementsByName("timePrepare")[0].value;
+        const steps = document.getElementsByName("steps")[0].value;
+
+        fetch("/dishes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            dishName,
+            timePrepare,
+            steps,
+          }),
+        });
+      });
+
+      const displayData = (data) => {
+        const listDish = document.getElementById("listDishes");
+        data.forEach((element) => {
+          const dishItem = document.createElement("li");
+          dishItem.innerHTML = element.name;
+          listDish.appendChild(dishItem);
+        });
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("/dishes")
+          .then((response) => response.json())
+          .then((data) => {
+            displayData(data);
+          });
+      });
+
+      const removeDish = () => {
+        const x = document.getElementById("dish").value;
+        console.log({ x });
+      };
+
+      document
+        .getElementById("btnRemoveDish")
+        .addEventListener("click", removeDish);
+    </script>
+  </body>
+</html>

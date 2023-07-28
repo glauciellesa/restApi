@@ -1,19 +1,32 @@
 import express from "express";
-import { getAllDishes, getDish } from "./services.js";
+import repository from "./repositories.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  console.log(masterKey);
-  const allDishes = getAllDishes();
+router.use(express.static("public"));
+
+router.get("/dishes", async (req, res) => {
+  const allDishes = await repository.getAllDishes();
   res.json(allDishes);
 });
 
-router.get("/:dishName", function (req, res) {
-  const dishName = req.params.dishName.toLowerCase();
-  console.log("quer", req.query);
-  const dish = getDish(dishName);
-  res.json(dish);
+router.get("/dishes/:dishId", async (req, res) => {
+  try {
+    const dishId = req.params.dishId;
+    const dish = await repository.getDish(dishId);
+    res.json(dish);
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+});
+
+router.post("/dishes", (req, res) => {
+  try {
+    repository.createDish(req.body);
+    res.status(201).json({ id: 1 }).end();
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
 });
 
 export default router;
