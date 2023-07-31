@@ -34,7 +34,7 @@ const getDish = (dishId) => {
 };
 
 const createDish = (dish) => {
-  console.log({ dish });
+  console.log("create", { dish });
   connection.query(
     "INSERT INTO dishes(name, time_prepare, steps) VALUES (?,?,?)",
     [dish.dishName, dish.timePrepare, dish.steps],
@@ -44,4 +44,21 @@ const createDish = (dish) => {
   );
 };
 
-export default { getAllDishes, getDish, createDish };
+const editDish = (editedItem) => {
+  console.log("editDish", dishId);
+  /*  const query =
+    "UPDATE dishes SET name = ?, time_prepare = ?, steps = ? WHERE id = ?";
+  const params = [
+    req.body.year,
+    req.body.month,
+    req.body.day,
+    req.body.message,
+    req.params.id,
+  ]; */
+};
+
+const removeDish = (dishId) => {
+  connection.query("DELETE FROM dishes WHERE id = ?", [dishId]);
+};
+
+export default { getAllDishes, getDish, createDish, removeDish, editDish };

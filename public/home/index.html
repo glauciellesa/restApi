@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Dish</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
   </head>
 
   <body style="box-sizing: border-box; padding: 0; margin: 0">
@@ -35,30 +39,7 @@
       <h3>My favorite dishes</h3>
       <ul id="listDishes" class="listDishes"></ul>
     </section>
-    <section
-      class="removeDishes"
-      style="padding: 2rem; background-color: rgb(103, 102, 102); color: white"
-    >
-      <h3>Remove dishe from your favorites</h3>
 
-      <input
-        id="dish"
-        type="text"
-        placeholder="Dish name"
-        style="padding: 0.5rem"
-      />
-      <button
-        id="btnRemoveDish"
-        type="submit"
-        style="
-          padding: 0.5rem;
-          background-color: rgb(73, 73, 73);
-          color: aliceblue;
-        "
-      >
-        Remove
-      </button>
-    </section>
     <script>
       document.getElementById("submit").addEventListener("click", (e) => {
         e.preventDefault();
@@ -81,9 +62,30 @@
 
       const displayData = (data) => {
         const listDish = document.getElementById("listDishes");
-        data.forEach((element) => {
+        data.forEach((dish) => {
           const dishItem = document.createElement("li");
-          dishItem.innerHTML = element.name;
+          const dishname = document.createElement("p");
+          const dishCommands = document.createElement("div");
+          const dishEdit = document.createElement("i");
+          dishEdit.className = "fa-regular fa-pen-to-square";
+          dishCommands.style.cssText =
+            "display: flex; gap:10px; align-items: center";
+
+          dishEdit.addEventListener("click", () => {
+            editDish(dish.id);
+          });
+          const dishRemove = document.createElement("p");
+          dishItem.style.cssText =
+            "display: flex; justify-content: space-between;";
+          dishRemove.className = "fa-solid fa-trash";
+          dishRemove.addEventListener("click", () => {
+            removeDish(dish.id);
+          });
+          dishname.innerHTML = dish.name;
+          dishItem.appendChild(dishname);
+          dishCommands.appendChild(dishEdit);
+          dishCommands.appendChild(dishRemove);
+          dishItem.appendChild(dishCommands);
           listDish.appendChild(dishItem);
         });
       };
@@ -96,14 +98,32 @@
           });
       });
 
-      const removeDish = () => {
-        const x = document.getElementById("dish").value;
-        console.log({ x });
+      const editData = (data) => {
+        const dishData = data[0];
+        console.log("editUI", data[0]);
+        const dishName = (document.getElementsByName("dishName")[0].value =
+          dishData.name);
+        const timePrepare = (document.getElementsByName(
+          "timePrepare"
+        )[0].value = dishData.time_prepare);
+        const steps = (document.getElementsByName("steps")[0].value =
+          dishData.steps);
       };
 
-      document
-        .getElementById("btnRemoveDish")
-        .addEventListener("click", removeDish);
+      const editDish = (dishId) => {
+        fetch(`/dishes/${dishId}`, { method: "GET" })
+          .then((response) => response.json())
+          .then((data) => editData(data));
+      };
+
+      const removeDish = (dishId) => {
+        fetch(`/dishes/${dishId}`, { method: "DELETE" })
+          .then((response) => response.json())
+          .then((data) => {
+            location.reload();
+            displayData(data);
+          });
+      };
     </script>
   </body>
 </html>

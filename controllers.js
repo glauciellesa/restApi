@@ -29,4 +29,24 @@ router.post("/dishes", (req, res) => {
   }
 });
 
+router.patch("/dishes/:dishId", async (req, res) => {
+  try {
+    const dishId = req.params.dishId;
+    console.log("edi", dishId);
+    repository.editDish(dishId);
+  } catch (error) {
+    console.log("aqui");
+    res.status(404).json(error.message);
+  }
+});
+
+router.delete("/dishes/:dishId", async (req, res) => {
+  try {
+    const dishId = req.params.dishId;
+    repository.removeDish(dishId);
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+});
+
 export default router;
