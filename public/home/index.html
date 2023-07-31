@@ -41,6 +41,48 @@
     </section>
 
     <script>
+      const createElement = (dish) => {
+        const dishItem = document.createElement("li");
+        const dishname = document.createElement("p");
+        const dishCommands = document.createElement("div");
+        const dishEdit = document.createElement("i");
+        dishItem.setAttribute("id", dish.id);
+        dishEdit.className = "fa-regular fa-pen-to-square";
+        dishCommands.style.cssText =
+          "display: flex; gap:10px; align-items: center";
+
+        dishEdit.addEventListener("click", () => {
+          editDish(dish.id);
+        });
+        const dishRemove = document.createElement("p");
+        dishItem.style.cssText =
+          "display: flex; justify-content: space-between;";
+        dishRemove.className = "fa-solid fa-trash";
+        dishRemove.addEventListener("click", () => {
+          removeDish(dish.id);
+        });
+        dishname.innerHTML = dish.name;
+        dishItem.appendChild(dishname);
+        dishCommands.appendChild(dishEdit);
+        dishCommands.appendChild(dishRemove);
+        dishItem.appendChild(dishCommands);
+        return dishItem;
+      };
+
+      const addData = (dish) => {
+        const listDish = document.getElementById("listDishes");
+        const dishItem = createElement(dish);
+        listDish.appendChild(dishItem);
+      };
+
+      const displayData = (data) => {
+        const listDish = document.getElementById("listDishes");
+        data.forEach((dish) => {
+          const dishItem = createElement(dish);
+          listDish.appendChild(dishItem);
+        });
+      };
+
       document.getElementById("submit").addEventListener("click", (e) => {
         e.preventDefault();
         const dishName = document.getElementsByName("dishName")[0].value;
@@ -57,38 +99,17 @@
             timePrepare,
             steps,
           }),
-        });
+        })
+          .then((response) => response.json())
+          .then((data) =>
+            addData({
+              id: data.id,
+              name: dishName,
+              timePrepare,
+              steps,
+            })
+          );
       });
-
-      const displayData = (data) => {
-        const listDish = document.getElementById("listDishes");
-        data.forEach((dish) => {
-          const dishItem = document.createElement("li");
-          const dishname = document.createElement("p");
-          const dishCommands = document.createElement("div");
-          const dishEdit = document.createElement("i");
-          dishEdit.className = "fa-regular fa-pen-to-square";
-          dishCommands.style.cssText =
-            "display: flex; gap:10px; align-items: center";
-
-          dishEdit.addEventListener("click", () => {
-            editDish(dish.id);
-          });
-          const dishRemove = document.createElement("p");
-          dishItem.style.cssText =
-            "display: flex; justify-content: space-between;";
-          dishRemove.className = "fa-solid fa-trash";
-          dishRemove.addEventListener("click", () => {
-            removeDish(dish.id);
-          });
-          dishname.innerHTML = dish.name;
-          dishItem.appendChild(dishname);
-          dishCommands.appendChild(dishEdit);
-          dishCommands.appendChild(dishRemove);
-          dishItem.appendChild(dishCommands);
-          listDish.appendChild(dishItem);
-        });
-      };
 
       document.addEventListener("DOMContentLoaded", () => {
         fetch("/dishes")
@@ -115,13 +136,21 @@
           .then((response) => response.json())
           .then((data) => editData(data));
       };
+      const removeDishElement = (dishId) => {
+        document.getElementById(dishId).remove();
+      };
 
       const removeDish = (dishId) => {
         fetch(`/dishes/${dishId}`, { method: "DELETE" })
-          .then((response) => response.json())
+          .then((response) => {
+            if (response.status == 200) {
+              return response.json();
+            } else {
+              throw new Error("Dish does not exist");
+            }
+          })
           .then((data) => {
-            location.reload();
-            displayData(data);
+            removeDishElement(data.id);
           });
       };
     </script>

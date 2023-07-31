@@ -34,14 +34,16 @@ const getDish = (dishId) => {
 };
 
 const createDish = (dish) => {
-  console.log("create", { dish });
-  connection.query(
-    "INSERT INTO dishes(name, time_prepare, steps) VALUES (?,?,?)",
-    [dish.dishName, dish.timePrepare, dish.steps],
-    (error, results) => {
-      if (error) return res.json({ error: error });
-    }
-  );
+  return new Promise((resolve, reject) => {
+    console.log("create", { dish });
+    connection.query(
+      "INSERT INTO dishes(name, time_prepare, steps) VALUES (?,?,?)",
+      [dish.dishName, dish.timePrepare, dish.steps],
+      (error, results) => {
+        resolve(results.insertId);
+      }
+    );
+  });
 };
 
 const editDish = (editedItem) => {
@@ -58,7 +60,20 @@ const editDish = (editedItem) => {
 };
 
 const removeDish = (dishId) => {
-  connection.query("DELETE FROM dishes WHERE id = ?", [dishId]);
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "DELETE FROM dishes WHERE id = ?",
+      [dishId],
+      (error, results) => {
+        if (results.affectedRows > 0) {
+          resolve(dishId);
+        } else {
+          reject(new Error("Dish does not exist"));
+        }
+        console.log(error, results);
+      }
+    );
+  });
 };
 
 export default { getAllDishes, getDish, createDish, removeDish, editDish };
